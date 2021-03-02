@@ -1,0 +1,9 @@
+index:
+    path: /
+    controller: App\Controller\HomeController::index
+#connect_facebook_check:
+#    path: /connect/facebook/check
+#    controller: App\Controller\FacebookController::connectCheckAction
+#    schemes: [https]
+
+

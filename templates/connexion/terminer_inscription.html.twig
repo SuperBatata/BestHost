@@ -1,0 +1,78 @@
+ {% extends 'base.html.twig' %}
+
+
+   {% block title%} BestHost  | Inscription  {% endblock title %}
+
+
+
+
+{% block body  %}
+
+
+
+    <main>
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+                                <h2> On y est presque !</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero Area End-->
+        <!--================login_part Area =================-->
+        <section class="login_part section_padding ">
+            <div class="container">
+                <div class="row align-items-center">
+
+
+                        <div class="login_part_form" style="margin-left:25%;margin-right:25%">
+                            <div class="login_part_form_iner">
+                                <h3>
+                                    Terminez votre inscription ! </h3>
+                                        {{ form_start(form) }}
+
+                                    <div class="col-md-12 form-group p_star ">
+                                        {{ form_errors(form.cin) }}
+                                        {{form_widget(form.cin,{ 'attr':{'placeholder':'Cin', 'class':'form-control' }}) }}
+                                    </div>
+                                    <div class="col-md-12 form-group p_star" >
+                                        {{ form_errors(form.password) }}
+                                        {{form_widget(form.password,{ 'attr':{'placeholder':'Password', 'class':'form-control' }})}}
+                                    </div>
+                                <div class="col-md-12 form-group p_star" >
+                                    {{ form_errors(form.confirm_password) }}
+                                    {{form_widget(form.confirm_password,{ 'attr':{'placeholder':'Confirm Password', 'class':'form-control' }})}}
+                                </div>
+                                <div class="row justify-content-center">
+                                {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </section>
+        <!--================login_part end =================-->
+    </main>
+
+    <!--? Search model Begin -->
+    <div class="search-model-box">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-btn">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Searching key.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+
+
+ {% endblock body %}
+    

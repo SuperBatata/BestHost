@@ -1,0 +1,8 @@
+.profile a:hover {
+    color: red;
+}
+
+.profile a {
+    color: black;
+}
+

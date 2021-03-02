@@ -1,0 +1,41 @@
+{% extends  'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container"><div class="row"></div></div>
+<div class="container">
+
+    <div class="row align-items-center">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col align-self-center">
+        <table class="table table-striped" border="1">
+        <thead>
+        <tr>
+            <th>Cin</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+            <tbody>
+
+            {% for user in users %}
+               <tr>
+                   <td>{{ user.cin }}</td>
+                   <td>{{ user.FirstName }}</td>
+                   <td>{{ user.LastName }}</td>
+                   <td>{{ user.email }}</td>
+               </tr>
+
+
+            {% endfor %}
+            </tbody>
+
+    </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
