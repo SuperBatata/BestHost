@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MaisonHoteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use  Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MaisonHoteRepository::class)
@@ -19,11 +20,13 @@ class MaisonHote
 
     /**
      * @ORM\Column(type="string", length=255)
+    
      */
     private $localisation;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=10, max=250,minMessage="description too short")
      */
     private $description;
 
@@ -34,6 +37,7 @@ class MaisonHote
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull
      */
     private $nombre_chambres;
 

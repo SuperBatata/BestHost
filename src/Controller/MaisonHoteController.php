@@ -37,17 +37,18 @@ class MaisonHoteController extends AbstractController
  }
 
  
-/**
-     
-     * @Route("/forum/{id}/edit", name="forum_edit")
-     */
+
  /**
-     * @Route("/maison_hote/new", name="new_maison_hote")
+    * @Route("/maison_hote/{id}/edit", name="edit_maison_hote") 
+    * @Route("/maison_hote/new", name="new_maison_hote")
      * Method({"GET","POST"})
   */
-public function new(Request $request)
+public function new(MaisonHote $maison=null,Request $request)
 {
-    $maison = new MaisonHote();
+    if(!$maison){
+        $maison = new MaisonHote();    
+    }
+    
 
     $form = $this->createFormBuilder($maison)
     ->add('localisation',TextType::class,array('attr'=>array('class'=>'form-controle')))
