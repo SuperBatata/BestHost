@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MaisonHoteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use  Symfony\Component\Validator\Constraints as Assert;
 
@@ -23,6 +25,11 @@ class MaisonHote
     
      */
     private $localisation;
+    /**
+     * @ORM\Column(type="string", length=255)
+    
+     */
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -42,9 +49,14 @@ class MaisonHote
     private $nombre_chambres;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity=MaisonImages::class, mappedBy="maison", orphanRemoval=true, cascade={"persist"})
      */
-    private $image;
+    private $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -62,6 +74,21 @@ class MaisonHote
 
         return $this;
     }
+
+
+
+    public function getnom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setnom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
 
     public function getDescription(): ?string
     {
@@ -107,6 +134,36 @@ class MaisonHote
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MaisonImages[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(MaisonImages $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setMaison($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(MaisonImages $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getMaison() === $this) {
+                $image->setMaison(null);
+            }
+        }
 
         return $this;
     }

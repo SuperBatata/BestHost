@@ -13,8 +13,11 @@
 				{% for maison in maisons %}
 					<div class="col-md-4">
 						<div class="card" style="width: 18rem;">
-							<img class="card-img-top" src="{{maison.image}}" alt="Card image cap">
+							{% for image in maison.images %}
+								<img class="card-img-top" src="{{asset('/images_maisons/' ~ image.name)}}" alt="Card image cap" height="250" width="100">
+							{% endfor %}
 							<div class="card-body">
+								<h5 class="card-title">{{maison.nom }}</h5>
 								<h5 class="card-title">{{maison.Localisation}}</h5>
 								<h5 class="card-title">{{maison.type}}</h5>
 

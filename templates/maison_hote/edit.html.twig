@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}edit maison Hote
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-xl-12">
+				{{form_start(form)}}
+
+				{{form_widget(form)}}
+
+				{% if app.request.attributes.get('_route')=='edit_maison_hote' %}
+					aa
+
+					{% for image in maison.images %}
+						<div>
+
+							<img src="{{asset('/images_maisons/' ~ image.name)}}" alt="img" width="100">
+							<a href="{{ path('maison_hote_delete_image',{'id':image.id}) }}" data-delete data-token="{{ csrf_token('delete images' ~ image.id)}}" style="color:black;">supp</a>
+
+						</div>
+
+					{% endfor %}
+				{% endif %}
+
+				{{form_end(form)}}
+
+			</div>
+
+		</div>
+	</div>
+
+	<script>
+	window.onload = () => {
+    // Gestion des boutons "Supprimer"
+    let links = document.querySelectorAll("[data-delete]")
+    
+    // On boucle sur links
+    for(link of links){
+        // On écoute le clic
+        link.addEventListener("click", function(e){
+            // On empêche la navigation
+            e.preventDefault()
+
+            // On demande confirmation
+            if(confirm("Voulez-vous supprimer cette image ?")){
+                // On envoie une requête Ajax vers le href du lien avec la méthode DELETE
+                fetch(this.getAttribute("href"), {
+                    method: "DELETE",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({"_token": this.dataset.token})
+                }).then(
+                    // On récupère la réponse en JSON
+                    response => response.json()
+                ).then(data => {
+                    if(data.success)
+                        this.parentElement.remove()
+                    else
+                        alert(data.error)
+                }).catch(e => alert(e))
+            }
+        })
+    }
+}
+
+	</script>
+{% endblock %}
