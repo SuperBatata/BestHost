@@ -24,7 +24,7 @@ class MaisonHote
      * @ORM\Column(type="string", length=255)
     
      */
-    private $localisation;
+    private $adresse;
     /**
      * @ORM\Column(type="string", length=255)
     
@@ -49,8 +49,25 @@ class MaisonHote
     private $nombre_chambres;
 
     /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotNull
+     */
+    private $prix;
+/**
+     * @ORM\Column(type="integer")
+     */
+    private $lat;
+
+/**
+     * @ORM\Column(type="integer")
+     */
+    private $lng;
+
+
+    /**
      * @ORM\OneToMany(targetEntity=MaisonImages::class, mappedBy="maison", orphanRemoval=true, cascade={"persist"})
      */
+
     private $images;
 
     public function __construct()
@@ -61,18 +78,6 @@ class MaisonHote
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getLocalisation(): ?string
-    {
-        return $this->localisation;
-    }
-
-    public function setLocalisation(string $localisation): self
-    {
-        $this->localisation = $localisation;
-
-        return $this;
     }
 
 
@@ -164,6 +169,54 @@ class MaisonHote
                 $image->setMaison(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getLat(): ?int
+    {
+        return $this->lat;
+    }
+
+    public function setLat(int $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?int
+    {
+        return $this->lng;
+    }
+
+    public function setLng(int $lng): self
+    {
+        $this->lng = $lng;
 
         return $this;
     }

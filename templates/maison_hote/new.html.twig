@@ -5,23 +5,36 @@
 
 {% block body %}
 
-
+<center>
 	<div class="container">
-
+		{{form_start(form)}}
 		<div class="row">
-			<div class="col-xl-12">
-				{{form_start(form,{'attr':{'novalidate':'novalidare'}})}}
-
-				{{form_widget(form)}}
-				{{form_errors(form)}}
-
-
-				{{form_end(form)}}
-
+			<div class="col-md-6">
+				<div class="form-group">
+					{{form_row(form.Nom)}}
+					{{form_row(form.Prix)}}
+					{{form_row(form.Adresse)}}
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					{{form_row(form.description)}}
+					{{form_row(form.type)}}
+					{{form_row(form.nombre_chambres)}}
+				</div>
 			</div>
 
 		</div>
+		<div class="row">
+			<div class="col">
+				<div class="form-group">
+					{{form_row(form.images)}}
+				</div>
+			</div>
+		</div>
+		{{form_end(form)}}
+
 	</div>
 
-
+</center>
 {% endblock %}

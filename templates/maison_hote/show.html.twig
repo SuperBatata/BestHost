@@ -4,20 +4,57 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				{% for image in maison.images %}
-					<img class="card-img-top" src="{{asset('/images_maisons/' ~ image.name)}}" alt="Card image cap" height="100" width="30px">
-				{% endfor %}
-				<h1>
-					{{maison.localisation}}
-				</h1>
-				<p>{{maison.description}}</p>
-				<a href="{{ path('maison_hote_delete', {'id': maison.id}) }}" class="btn btn-light">delete</a>
-				<a href="{{ path('edit_maison_hote', {'id': maison.id}) }}" class="btn btn-light">Edit</a>
+	<div class="jumbotron">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					{% for image in maison.images%}
+						<img src="{{asset('/images_maisons/' ~ image.name)}}" alt="Card image cap" height="100" max-width="300px">
+					{% endfor %}
+				</div>
 			</div>
+			{% if maison is defined and maison is not null %}
+				<div class="row">
+					<div class="col">
+						<label>Nom de la maison</label>
+						<h1>
+							{{maison.nom}}
+						</h1>
+					</div>
+					<div class="col">
+						<label>Prix de la journee</label>
+						<h1>
+							{{maison.Prix}}
+						</h1>
+					</div>
+					<div class="col">
+						<label>Desciption de la maison</label>
+						<p>
+							{{maison.description }}
+							<br>
+							Adress :
+							{{maison.Adresse }}
+							<br>
+							Nombre de chambres :
+							{{maison.nombrechambres}}
+							<br>
+							type :
+							{{maison.type}}
+							<br>
+
+
+						</p>
+					</div>
+				</div>
+
+				<div class="row">
+					<a href="{{ path('maison_hote_delete', {'id': maison.id}) }}" class="btn btn-light">delete</a>
+					<a href="{{ path('edit_maison_hote', {'id': maison.id}) }}" class="btn btn-light">Edit</a>
+				</div>
+			{% endif %}
 		</div>
+
 	</div>
+
 
 {% endblock %}

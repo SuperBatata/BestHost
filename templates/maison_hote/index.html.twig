@@ -4,36 +4,56 @@
 {% endblock %}
 
 {% block body %}
-
-
-	{% if maisons %}
+	<div class="jumbotron">
 		<div class="container">
+			{{form_start(form)}}
+			<div class="form-row">
+				<div class="col">
+					{{ form_row(form.nom) }}
+				</div>
 
-			<div class="row">
-				{% for maison in maisons %}
-					<div class="col-md-4">
+				<div class="col">
+					<button class="btn btn-primary">Recherche</button>
+				</div>
+
+			</div>
+			{{form_end(form)}}
+
+
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="row">
+
+			{% for maison in maisons %}
+
+				<div class="col-md-4 ">
+					<div class="filterDiv {{maison.type}}">
 						<div class="card" style="width: 18rem;">
 							{% for image in maison.images %}
 								<img class="card-img-top" src="{{asset('/images_maisons/' ~ image.name)}}" alt="Card image cap" height="250" width="100">
 							{% endfor %}
 							<div class="card-body">
 								<h5 class="card-title">{{maison.nom }}</h5>
-								<h5 class="card-title">{{maison.Localisation}}</h5>
-								<h5 class="card-title">{{maison.type}}</h5>
+								<h5 class="card-title">{{maison.adresse}}</h5>
+
 
 								<p class="card-text">{{maison.description}}</p>
 								<a href="/maison_hote/{{maison.id}}" class="btn btn-primary">show</a>
 							</div>
 						</div>
+
 					</div>
-				{% endfor %}
-			</div>
-
-
+				</div>
+			{% endfor %}
 		</div>
 
 
-	{% else %}
-		<p>no maisons to display</p>
-	{% endif %}
+	</div>
+
+
 {% endblock %}
+
+{% block scripts %}{% endblock %}

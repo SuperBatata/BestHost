@@ -3,8 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\MaisonHote;
+use App\Entity\MaisonRecherche;
+use App\Entity\PriceSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Migrations\Query\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method MaisonHote|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +23,7 @@ class MaisonHoteRepository extends ServiceEntityRepository
         parent::__construct($registry, MaisonHote::class);
     }
 
+   
     // /**
     //  * @return MaisonHote[] Returns an array of MaisonHote objects
     //  */

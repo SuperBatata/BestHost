@@ -2,10 +2,15 @@
 
 namespace App\Controller;
 
+
+
+
+
 use App\Entity\MaisonHote;
 use App\Entity\MaisonImages;
+use App\Entity\MaisonRecherche;
 use App\Form\MaisonHoteType;
-
+use App\Form\MaisonRechercheType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpParser\Node\Stmt\Return_;
@@ -20,15 +25,38 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MaisonHoteController extends AbstractController
 {
+
+
+
     /**
-     * @Route("/maison_hote", name="maison_hote_list" ,methods={"GET"})
+     * @Route("/maison_hote", name="maison_hote_list" ,methods={"GET","POST"})
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $search = new MaisonRecherche();
 
-        $maison = $this->getDoctrine()->getRepository(MaisonHote::class)->findall();
+        $form = $this->createForm(MaisonRechercheType::class, $search);
 
-        return $this->render('maison_hote/index.html.twig', ['maisons' => $maison]);
+        $form->handleRequest($request);
+
+        $maison = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $nom = $search->getNom();
+            if ($nom != "")
+                $maison = $this->getDoctrine()->getRepository(MaisonHote::class)->findBy(['nom' => $nom]);
+            else
+                $maison = $this->getDoctrine()->getRepository(MaisonHote::class)->findAll();
+        }
+
+        //  $maison = $this->getDoctrine()->getRepository(MaisonHote::class)->findall($search);
+
+
+        return $this->render('maison_hote/index.html.twig', [
+            'maisons' => $maison,
+            'form' => $form->createView()
+
+        ]);
     }
 
 
@@ -168,4 +196,5 @@ class MaisonHoteController extends AbstractController
             return new JsonResponse(['error' => 'Token Invalide'], 400);
         }
     }
+   
 }
