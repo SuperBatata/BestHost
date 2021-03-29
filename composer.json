@@ -11,6 +11,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
         "dompdf/dompdf": "dev-master",
+        "knplabs/knp-paginator-bundle": "5.x-dev",
         "knpuniversity/oauth2-client-bundle": "^2.7",
         "league/oauth2-facebook": "^2.0",
         "league/oauth2-google": "^3.0",

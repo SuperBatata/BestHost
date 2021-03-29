@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MaisonHoteController!
+{% block title %}Maisons d'hotes
 {% endblock %}
 
 {% block body %}
@@ -87,10 +87,14 @@
 					</div>
 				</div>
 			{% endfor %}
+
+			<div class="navigation">
+			</div>
+
 		</div>
 
 		<div class="row">
-		
+
 			{% if is_granted('ROLE_GERANT_MAISON_HOTE') %}
 
 

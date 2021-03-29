@@ -15,6 +15,7 @@ use App\Entity\MaisonImages;
 use App\Entity\MaisonRecherche;
 use App\Form\MaisonHoteType;
 use App\Form\MaisonRechercheType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpParser\Node\Stmt\Return_;
@@ -39,7 +40,7 @@ class MaisonHoteController extends AbstractController
     /**
      * @Route("/maison_hote", name="maison_hote_list" ,methods={"GET","POST"})
      */
-    public function index(Request $request): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
         $search = new MaisonRecherche();
 
@@ -51,10 +52,19 @@ class MaisonHoteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $nom = $search->getNom();
-            if ($nom != "")
+            if ($nom != "") {
+
                 $maison = $this->getDoctrine()->getRepository(MaisonHote::class)->findBy(['nom' => $nom]);
-            else
-                $maison = $this->getDoctrine()->getRepository(MaisonHote::class)->findAll();
+            } else {
+                $donnees = $this->getDoctrine()->getRepository(MaisonHote::class)->findAll();
+                $maison = $paginator->paginate(
+
+                    $donnees,
+                    $request->query->getInt('page', 2),
+                    1
+
+                );
+            }
         }
 
         //  $maison = $this->getDoctrine()->getRepository(MaisonHote::class)->findall($search);
@@ -205,7 +215,4 @@ class MaisonHoteController extends AbstractController
             return new JsonResponse(['error' => 'Token Invalide'], 400);
         }
     }
-
-
-  
 }
