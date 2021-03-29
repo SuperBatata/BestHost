@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 
 
+
+use phpDocumentor\Reflection\Types\Null_;
 
 use App\Entity\MaisonHote;
 use App\Entity\MaisonImages;
@@ -196,5 +200,7 @@ class MaisonHoteController extends AbstractController
             return new JsonResponse(['error' => 'Token Invalide'], 400);
         }
     }
-   
+
+
+  
 }
