@@ -23,9 +23,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
+
+
+
 
 class MaisonHoteController extends AbstractController
 {
@@ -66,6 +70,7 @@ class MaisonHoteController extends AbstractController
 
 
     /**
+     * @IsGranted("ROLE_GERANT_MAISON_HOTE")
      * @Route("/maison_hote/new", name="new_maison_hote")
      * Method({"GET","POST"})
      */
@@ -187,7 +192,7 @@ class MaisonHoteController extends AbstractController
             // On récupère le nom de l'image
             $nom = $image->getName();
             // On supprime le fichier
-            unlink($this->getParameter('images_directory') . '/' . $nom);
+            unlink($this->getParameter('images_direcoty') . '/' . $nom);
 
             // On supprime l'entrée de la base
             $em = $this->getDoctrine()->getManager();

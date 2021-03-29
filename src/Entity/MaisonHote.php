@@ -53,13 +53,13 @@ class MaisonHote
      * @Assert\NotNull
      */
     private $prix;
-/**
-     * @ORM\Column(type="integer")
+    /**
+     * @ORM\Column(type="integer" ,nullable=true)
      */
     private $lat;
 
-/**
-     * @ORM\Column(type="integer")
+    /**
+     * @ORM\Column(type="integer" , nullable=true)
      */
     private $lng;
 

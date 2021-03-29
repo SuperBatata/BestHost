@@ -89,6 +89,19 @@
 			{% endfor %}
 		</div>
 
+		<div class="row">
+		
+			{% if is_granted('ROLE_GERANT_MAISON_HOTE') %}
+
+
+				<a href="/maison_hote/new " class="btn btn-primary">Ajouter maison d'hote</a>
+
+
+			{% endif %}
+
+
+		</div>
+
 
 	</div>
 

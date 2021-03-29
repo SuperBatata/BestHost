@@ -84,11 +84,21 @@
 						</p>
 					</div>
 				</div>
+				{% if is_granted('ROLE_GERANT_MAISON_HOTE') %}
 
-				<div class="row">
-					<a href="{{ path('maison_hote_delete', {'id': maison.id}) }}" class="btn btn-light">delete</a>
-					<a href="{{ path('edit_maison_hote', {'id': maison.id}) }}" class="btn btn-light">Edit</a>
-				</div>
+					<div class="row">
+						<a href="{{ path('maison_hote_delete', {'id': maison.id}) }}" class="btn btn-light">delete</a>
+						<a href="{{ path('edit_maison_hote', {'id': maison.id}) }}" class="btn btn-light">Edit</a>
+					</div>
+
+
+				{% else %}
+					<div class="row">
+						
+						<a href="{{ path('edit_maison_hote', {'id': maison.id}) }}" class="btn btn-light">reserver</a>
+					</div>
+				{% endif %}
+
 			{% endif %}
 		</div>
 
@@ -105,17 +115,16 @@
 	</style>
 
 
-
 {% endblock %}
 {% block scripts %}
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 
 	<!--Load the API from the specified URL
-																			     * The async attribute allows the browser to render the page while the API loads
-																			     * The key parameter will contain your own API key (which is not needed for this tutorial)
-																			     * The callback parameter executes the initMap() function
-																			     -->
+																							     * The async attribute allows the browser to render the page while the API loads
+																							     * The key parameter will contain your own API key (which is not needed for this tutorial)
+																							     * The callback parameter executes the initMap() function
+																							     -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAObzCbk0hwnk8LbUcTeFguDk5ZDr36VS4&callback=initMap"></script>
 	<script>
 
